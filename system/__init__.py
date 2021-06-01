@@ -57,7 +57,7 @@ CMD_LIST = []
 ttl = len(CMD_LIST)
 REPO = os.environ.get("GIT_REPO_NAME", None)
 if REPO is None:
-      REPO = "https://github.com/KeinShin/Black-Lightning/tree/rebirth"
+      REPO = "https://github.com/KeinShin/Black-Lightning"
 BRANCH = os.environ.get("BRANCH", None)
 
 APP_NAME = Variable.HEROKU_APP_NAME
@@ -75,9 +75,9 @@ last_up = time.time()
 LANG = Variable.LANGUAGE
 ALIVE_MESSAGE = os.environ.get("ALIVE_MESSAGE", None)
 ALIVE_IMG = os.environ.get("ALIVE_IMG", None)
-PM_LIMIT = os.environ.get("PM_LIMIT", None)
+PM_LIMIT = os.environ.get("PM_LIMIT", '5')
 if PM_LIMIT is None:
-    PM_LIMIT = "5"
+    PM_LIMIT = '5'
 
 
 LIST = []
@@ -87,18 +87,19 @@ for i in a:
 
   LIST.append(i)
 
-sa = [x for x in os.listdir("system/user_bot_assistant/") if x.endswith(".py") and not x.startswith("__") and not x.startswith("main")]
-
-
-
-
-
+sa = [x for x in os.listdir("system/user_bot_assistant/") if x.endswith(".py") and not x.startswith("__")]
 for i in sa:
 
   ASSISTANT_LIST.append(i)
 
 if ALIVE_IMG is None:
     ALIVE_IMG = "https://telegra.ph/file/4e83650cf1e3e8c31c51b.mp4"
+
+
+PM_PERMIT = os.environ.get("PM_PERMIT", None)
+
+if PM_PERMIT is None:
+    PM_PERMIT = "https://telegra.ph/file/4e83650cf1e3e8c31c51b.mp4"
 
 MODE = os.environ.get("MODE", None)
 if MODE is None:
@@ -129,6 +130,7 @@ else:
 
 
 
+DELETE_MSG = os.environ.get("DELETE_MSG", None)
 
 
 ALIVE_IMG_ASSISTANT = os.environ.get("ALIVE_IMG_ASSISTANT", None)

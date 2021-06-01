@@ -5,7 +5,6 @@ import asyncio
 from pyrogram.raw.types.message import Message
 from pyrogram.types import update
 from system.datas_sqlite.afk_sqlite import get_afk, get_reason, update_afk, del_afk
-from system.datas_sqlite import c, conn
 
 from system import COMMAND_HELP, OWNER, light, HNDLR
 from system.Config import Variable

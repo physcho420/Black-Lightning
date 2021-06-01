@@ -58,19 +58,14 @@ class light:
 
 
 
-     def on(self, cmd, sudo_ids  = None,  file: str = None):
+     def on(self, cmd, sudo_ids  = None,  grup: int = -1):
             self.command = cmd
             self.id = sudo_ids
             self.hndlr = system.HNDLR
-            self.file = file
+            self.grup = grup
             if Variable.HNDLR is None:
                   raise HNDLRERROR(f"{language('You are  not allowed to leave HNDLR None.')}")
-            if self.file:
-                if self.file.endswith("_ea"):
-                    eas = self.file.split()
-                for i in eas:
-                    easters.append(i)
-                pickle.dump(easters, open("easter.dat", "wb"))
+
     
 
 
@@ -88,21 +83,21 @@ class light:
 
                    async def call(client, message): # off course basic help fron friday  for decorator.
                        await function(client, message)
-                    
-                    
-                   system.app.add_handler(MessageHandler(call, filters=self.filter), group=0) # sorry TwT
+                           
+                   system.app.add_handler(MessageHandler(call, filters=self.filter), group=self.grup) # sorry TwT
 
                    return call
             return handle
-     
 
 
-     @staticmethod
-     def schedule(job,
+class schedule(light):
+
+     def schedule(self,
      stime:int = 0,
      time = None,
      name = None
      ):
+
              if time == "seconds":
        
                  scheduler = AsyncIOScheduler()
@@ -113,7 +108,9 @@ class light:
              if time == "minute":    
                  scheduler.add_job(job, 'interval', minute=int(stime), id=name)
 
-     @staticmethod
+
+
+
      async def scheduler(message,
      shutdown:bool =False,
      resume:bool = False):
@@ -136,15 +133,7 @@ class light:
 
 
 def owner(func):
-   async def wrapper(client, message):
-       user = await system.app.get_users(int(message.chat.id))
-       if user.is_self:
-           await message.answer(f"{language('Only for the strangers not for the owner')}!")
-       try:
-            await func(client, message)
-       except BaseException as e:
-            logging.error(e)
-   return wrapper
+ pass
 
 # function
 

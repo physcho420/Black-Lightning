@@ -14,6 +14,12 @@ import io
 import logging
 import os
 import system
+from system.Config import a
+
+
+
+
+
 
 from googletrans import Translator, LANGUAGES
 from googletrans.models import Translated
@@ -48,6 +54,11 @@ async def bot_name():
 
 # from var import Var
 # herokuclient = heroku3.from_key(Var.HEROKU_API_KEY)
+if a:
+    from exconfig import variable as Variable
+
+
+
 class Variable(object):
     TG_API_ID = os.environ.get("TG_APP_ID", None)
     TG_API_HASH = os.environ.get("TG_API_HASH", None)

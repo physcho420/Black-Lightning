@@ -456,7 +456,7 @@ def help_menu(pg_num, setv, prefix, alive: bool =  False):
             text=f"X {x} X",
             callback_data=f"{data}{x}{type_}"
         )
-        for x in sorted(sortsed.keys())
+        for x in sorted(sortsed)
     ]
     pairs = list(zip(modules[::number_of_cols], modules[1::number_of_cols]))
     if len(modules) % number_of_cols == 1:
@@ -636,3 +636,9 @@ async def lightning_is_better(client, message: CallbackQuery):
     bot_id = bot_id.id
     await message.edit_message_text('Master is busy for some reason contact him via bot link given below',
     reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("Contact Him", url=f"t.me/{Variable.TG_BOT_USER_NAME}")]]))
+
+    # await app.send_message(
+    #     user.id,
+    #     f"Master is busy for some reason contact him via bot link given below",
+    #     reply_markup=btn,
+    # )

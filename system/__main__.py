@@ -15,13 +15,10 @@ from pyrogram.handlers import MessageHandler
 import system
 from pyrogram import idle
 from pyrogram.errors import *
-from system.Config import Variable
+from system.Config.utils import Variable
 from pyrogram.raw.types import BotCommand
 logging.basicConfig(level=logging.INFO)
 logging.basicConfig(level=logging.ERROR)
-
-
-
 import holidays
 from datetime import date, datetime
 if Variable.COUNTRY:
@@ -82,6 +79,15 @@ async def add_bot_to_logg_grup(client, message):
 # import importlib
 
 
+
+import logging
+import os
+import importlib
+import pyrogram
+logging.basicConfig(level=logging.INFO)
+logging.basicConfig(level=logging.ERROR)
+
+
 from  system import bot, app
 
 def o():
@@ -131,60 +137,61 @@ def o():
         logging.info("Only Updater will work from now util u update a fix the bug :P! with")
         app.run()
         return
-
-o()
-
-try:
-    try:   
-   
-      bot.start()
-
-      try:
-  
-        bot.join_chat(chet)
-       
-        text = f"BLACK USERBOT has benn deployed."
-        bot.send_message(chet, text)
-      except UserAlreadyParticipant:
-        pass
-
-    except BaseException:
-       logging.error("CANNOT ADD ASSISTANT TO LOGS CHAT")
-       pass
-    except SessionExpired:
-        logging.info("Your String Session is not valid create a new one for more contact @lightning_support_group, till bot stopped")
-        exit(1)
-        
-    except SessionRevoked:
-         logging.info("Bot Father Api Token Revoked replace old with new one till bot stopped")
-         exit(1)
-    except AuthKeyDuplicated:
-         logging.error("You can not use same token in two or more apps/client, stop one token!")
-         exit(1)
-    except AccessTokenInvalid:
-        logging.error("Bot token expired or not valid create new one.")
-        exit(1)
-    except AccessTokenInvalid:
-        logging.error("Bot token not valid")
-        exit(1)
+if __name__ == "__main__":
+    logging.info("Setting up")
+    o()
+    
     try:
-     logging.info(f"© Black-Lightning - KeinShin, All  rights Reserved.")
-     logging.info(f"Plugins and Whole System Loaded!, do {system.HNDLR}alive to check!")
-     logging.info(f"Also add assistant to log channel to access more features!")
-     app.run() 
-     idle()
-    except SessionRevoked:
-       logging.error("String Session Revoked or Terminated! Create a new one")
-       exit(1)
-    except SessionExpired:
-        logging.info("Your String Session is not valid create a new one for more contact @lightning_support_group, till bot stopped")
+        try:   
+       
+          bot.start()
+    
+          try:
+      
+            bot.join_chat(chet)
+           
+            text = f"BLACK USERBOT has benn deployed."
+            bot.send_message(chet, text)
+          except UserAlreadyParticipant:
+            pass
+    
+        except BaseException:
+           logging.error("CANNOT ADD ASSISTANT TO LOGS CHAT")
+           pass
+        except SessionExpired:
+            logging.info("Your String Session is not valid create a new one for more contact @lightning_support_group, till bot stopped")
+            exit(1)
+            
+        except SessionRevoked:
+             logging.info("Bot Father Api Token Revoked replace old with new one till bot stopped")
+             exit(1)
+        except AuthKeyDuplicated:
+             logging.error("You can not use same token in two or more apps/client, stop one token!")
+             exit(1)
+        except AccessTokenInvalid:
+            logging.error("Bot token expired or not valid create new one.")
+            exit(1)
+        except AccessTokenInvalid:
+            logging.error("Bot token not valid")
+            exit(1)
+        try:
+         logging.info(f"© Black-Lightning - KeinShin, All  rights Reserved.")
+         logging.info(f"Plugins and Whole System Loaded!, do {system.HNDLR}alive to check!")
+         logging.info(f"Also add assistant to log channel to access more features!")
+         app.run() 
+         idle()
+        except SessionRevoked:
+           logging.error("String Session Revoked or Terminated! Create a new one")
+           exit(1)
+        except SessionExpired:
+            logging.info("Your String Session is not valid create a new one for more contact @lightning_support_group, till bot stopped")
+            exit(1)
+        except AuthKeyDuplicated:
+             logging.error("You can not use same strings in two or more apps/client, terminate one of create another")
+             exit(1)
+    except ApiIdInvalid:
+        logging.error("The Given Api Id is invalid,  grab ur Id from my.telegram.org Now!")
         exit(1)
-    except AuthKeyDuplicated:
-         logging.error("You can not use same strings in two or more apps/client, terminate one of create another")
-         exit(1)
-except ApiIdInvalid:
-    logging.error("The Given Api Id is invalid,  grab ur Id from my.telegram.org Now!")
-    exit(1)
 
 
 

@@ -1,4 +1,4 @@
- # Copyright (C) 2021 KeinShin@Github. All rights reserved
+# Copyright (C) 2021 KeinShin@Github. All rights reserved
 
 
 from collections import OrderedDict

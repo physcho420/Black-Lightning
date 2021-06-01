@@ -50,7 +50,7 @@ DEVS = "1311769691" # more to be added
         
 
 
-@light.on(["a","ap", "approve"])
+@light.on(["a","ap", "approve"], grup=-1)
 async def ap(client, message: Message):
        users=list(OrderedDict.fromkeys(all_user()))
        if Variable.PROTECTION == "OFF":
@@ -87,7 +87,7 @@ async def ap(client, message: Message):
 
 
 
-@light.on(["da", "disap", "disapprove"])
+@light.on(["da", "disap", "disapprove"], grup=-1)
 async def dis(client, message: Message):
     if Variable.PROTECTION == "OFF":
           logging.info("Execution Failed as Protection is off")
@@ -219,7 +219,7 @@ def user_abused(txt):
     pass
 
 
-@light.on(["listapprovd"])
+@light.on(["listapprovd"], grup=-1)
 async def liast(client, message):
     users=list(OrderedDict.fromkeys(all_user()))
    

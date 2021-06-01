@@ -1,14 +1,12 @@
- # Copyright (C) 2021 KeinShin@Github.
-
-
-
+from pyrogram.errors.exceptions.bad_request_400 import AdminRankInvalid
+from pyrogram.errors.exceptions.forbidden_403 import RightForbidden
 from system.plugins import light
 
 from system import app, HNDLR
 from pyrogram.errors import MediaCaptionTooLong
 
 
-@light.on("get chats")
+@light.on("get chats", grup=-1)
 async def chat(client ,message):
     try:
         txt = message.text
@@ -34,7 +32,7 @@ async def chat(client ,message):
 
 
 
-@light.on(["user", 'whois', 'identify', "find"])
+@light.on(["user", 'whois', 'identify', "find"], grup=-1)
 async def _(client, message):
     try:
         txt = message.text
@@ -65,3 +63,26 @@ async def _(client, message):
     \n\n**__Is Scam__**: `{skam}`\
     \n**__Last Online__**:- `{status}`\
     \n**__Is Bot__**: `{is_bot}`")
+
+
+@light.on(['unban'], grup=-1)
+async def s(client, message):
+    txt = message.text
+    if "all" in txt:
+        s=0
+        c=0
+        await message.edit(f"**Unbanning every memeber of chat {message.chat.id}**")
+        for member in await app.iter_chat_members(message.chat.id, filter="kicked"):
+          try: 
+
+            try:
+              await app.unban_chat_member(
+    chat_id=message.chat.id,
+    user_id=member.user.id)
+              s+=1
+            except Exception:
+               c += 1
+            await message.edit(f"**Successfully unbanned {s} user failed for {c}**")
+          except RightForbidden:
+            await message.edit("**See me dont hab rights TwT**")
+

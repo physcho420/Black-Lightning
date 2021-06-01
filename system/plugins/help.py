@@ -28,7 +28,7 @@ HNDLR = str(Variable.HNDLR)
 
 g =  Variable.TG_BOT_USER_NAME
 # unofficial_or_no_help = 0
-@light.on(["help"])
+@light.on(["help"], grup = -1)
 async def helper(client, message):
         count = 0
         try:
@@ -77,13 +77,13 @@ async def helper(client, message):
                   logging.error("You should have '@' with your bot's username eg -:@{} not like -: {}".format(g, g))
                   await app.send_message(message.chat.id, "**You should have '@' with your bot's username eg -:@{} not like -: {}**".format(g, g))
                   return
-                await message.delete()
                 bot_results = await client.get_inline_bot_results(f"{g}", "Menu")
                 await client.send_inline_bot_result(
                message.chat.id,
                bot_results.query_id,
                bot_results.results[0].id
            )
+                await message.delete()
 
            except BotInlineDisabled:
              await message.edit(f"**Bot {g}  inline is disabled turn it on!**")
@@ -108,7 +108,7 @@ async def helper(client, message):
             except BaseException:
              pass
 
-@light.on(["details"])
+@light.on(["details"], grup = -1)
 async def detail(client, message):
   
     count = 0

@@ -9,4 +9,6 @@ def Connect():
     conn = sqlite3.connect(f"{owner}.db")
     return conn
 
-   
+    
+conn = Connect()
+c = conn.cursor()

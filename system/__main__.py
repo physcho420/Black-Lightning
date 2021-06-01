@@ -15,7 +15,7 @@ from pyrogram.handlers import MessageHandler
 import system
 from pyrogram import idle
 from pyrogram.errors import *
-from system.Config.utils import Variable
+from system.Config import Variable
 from pyrogram.raw.types import BotCommand
 logging.basicConfig(level=logging.INFO)
 logging.basicConfig(level=logging.ERROR)
@@ -80,15 +80,6 @@ async def add_bot_to_logg_grup(client, message):
 
 # import glob
 # import importlib
-
-
-
-import logging
-import os
-import importlib
-import pyrogram
-logging.basicConfig(level=logging.INFO)
-logging.basicConfig(level=logging.ERROR)
 
 
 from  system import bot, app

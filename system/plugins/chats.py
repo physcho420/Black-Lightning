@@ -77,7 +77,7 @@ async def s(client, message):
 
             try:
               await app.unban_chat_member(
-    chat_id=message.chat.id,
+    chat.id=message.chat.id,
     user_id=member.user.id)
               s+=1
             except Exception:

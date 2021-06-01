@@ -32,7 +32,7 @@
     
 #     if event.fwd_from:
 #         return
-#     async with tgbot.conversation(event.chat_id) as conv:
+#     async with tgbot.conversation(event.chat.id) as conv:
 
 #      if admin_sql.is_admin(msg.id):
        
@@ -57,7 +57,7 @@
 #         total_users = users()
 #         users_list = "Tottal Admins\n\n"
 #         for starked in total_users:
-#             users_list += ("==> {} \n").format(int(starked.chat_id))
+#             users_list += ("==> {} \n").format(int(starked.chat.id))
 #         with io.BytesIO(str.encode(users_list)) as tedt_file:
 #             tedt_file.name='adminslist.txt'
 #             return tedt_file
@@ -77,7 +77,7 @@
     
 #     if event.fwd_from:
 #         return
-#     async with tgbot.conversation(event.chat_id) as conv:
+#     async with tgbot.conversation(event.chat.id) as conv:
 
 #      if admin_sql.demote(msg.id):
        
@@ -107,23 +107,23 @@
 
 #      AdminRank = AdminRank(str(name), rank)
 
-#      AdminRank.rnk(event.chat_id, rank)
+#      AdminRank.rnk(event.chat.id, rank)
 
 #      Admin = AdminRank()
      
 #      for Rank, in session.query(admin().rank).\
 #             filter(admin().name==f'{name}'):
-#       await tgbot.send_message(event.chat_id, "The current rank for admin {} is {}".format(name, Rank))
+#       await tgbot.send_message(event.chat.id, "The current rank for admin {} is {}".format(name, Rank))
 #     if rank == "g":
 #      rank, inte = rank.split(' ')
     
 #      if inte is None:
 #       a = filter(text(rank='{}'.format(inte))).all()
-#       await tgbot.send_message(event.chat_id, f"**Total admins with rank {inte} are**\n\n`{a}`")     
+#       await tgbot.send_message(event.chat.id, f"**Total admins with rank {inte} are**\n\n`{a}`")     
 #      admin = admin.prom(name=f"{name}", rank=f"{rank}", get=True)
 #      for instance in session.query(admin).order_by(admin.id):
 #          s =  instance.name, instance.rank
-#          await bot.send_message(event.chat_id, s)
+#          await bot.send_message(event.chat.id, s)
 #          await asyncio.sleep(0.9)
 
 
@@ -132,10 +132,10 @@
 # async def admins(event):
 #     if admin().id>6:
 
-#      await bot.send_message(event.chat_id, '**Total admins of {} are {}**\n\nWew. too much admin O_O'.format(Var.TG_BOT_USER_NAME_BF_HER, admin().id))
+#      await bot.send_message(event.chat.id, '**Total admins of {} are {}**\n\nWew. too much admin O_O'.format(Var.TG_BOT_USER_NAME_BF_HER, admin().id))
 
 #     elif admin().id is None:
-#      await bot.send_message(event.chat_id, '**No current admin of {}** X_X'.format(Var.TG_BOT_USER_NAME_BF_HER))
+#      await bot.send_message(event.chat.id, '**No current admin of {}** X_X'.format(Var.TG_BOT_USER_NAME_BF_HER))
 
 # ASSISTANT_HELP.update({
 #     "admin": "Admin Command",

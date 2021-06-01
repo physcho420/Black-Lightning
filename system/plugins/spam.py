@@ -18,10 +18,10 @@ A Plug to be ported
 #         if message:
 
 #            for i in range(1, blacbot_count):
-#              await bot.send_message(message.chat_id ,file=message)
+#              await bot.send_message(message.chat.id ,file=message)
 #         else:
 #             for i in(1, blacbot_count):
-#              await bot.send_message(message.chat_id ,message)
+#              await bot.send_message(message.chat.id ,message)
 
 #         await blac.delete()
 

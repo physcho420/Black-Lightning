@@ -11,7 +11,7 @@ from system.plugins import light
 import random
 import os
 API = "iuPzOezHMHey7tbWDJnk1BmmbM772sygky5YfNZT"
-@light.on(["nasa"])
+@light.on(["nasa"], grup=-1)
 async def nasa(client, message):
   txt = message.text
   if "earth" in txt:
@@ -66,32 +66,34 @@ async def nasa(client, message):
       sed=sed[0]
       sed=sed['name']  
   else:
+        
      txt = txt.split() # if 1 or more inputs
-     txt=" ".join(txt[1:])
+     if " " in txt:
+       txt=" ".join(txt[1:])
 
-     await message.edit(f"**FINDING INFO ABOUT {txt} from nasa's database**")
+       await message.edit(f"**FINDING INFO ABOUT {txt} from nasa's database**")
     
-     try:
-      ur = f"https://images-api.nasa.gov/search?q={txt}"
-      r=requests.get(ur)
-     
-      s = r.json()
-     except Exception:
-       await message.edit(f"**{txt} is not available**")
-     sed=s['collection']
-     cont=sed['items'][0]['links'][0]
-     data = sed['items'][0]['data'][0]
+       try:
+        ur = f"https://images-api.nasa.gov/search?q={txt}"
+        r=requests.get(ur)
+       
+        s = r.json()
+       except Exception:
+         await message.edit(f"**{txt} is not available**")
+       sed=s['collection']
+       cont=sed['items'][0]['links'][0]
+       data = sed['items'][0]['data'][0]
     #  print(data)
-     title=data["title"]
-     created=data['date_created']
-     try:
-      des=data['description']
-     except KeyError:
-      des = ""
+       title=data["title"]
+       created=data['date_created']
+       try:
+        des=data['description']
+       except KeyError:
+        des = ""
 
-     img=cont['href']
-     urllib.request.urlretrieve(img, "nasa.jpg")
-     await app.send_photo(message.chat.id, "nasa.jpg", caption=f"""
+       img=cont['href']
+       urllib.request.urlretrieve(img, "nasa.jpg")
+       await app.send_photo(message.chat.id, "nasa.jpg", caption=f"""
 **I found some thing about** `{txt}` **from nasa's database**
 
 **TITLE** -  `{title}`
@@ -100,8 +102,8 @@ async def nasa(client, message):
 
 **INFO** - `{des}`
 """)
-     await message.delete()
-     os.remove("nasa.jpg")
+       await message.delete()
+       os.remove("nasa.jpg")
 
 
 COMMAND_HELP.update({

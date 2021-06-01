@@ -89,14 +89,24 @@ async def helper(client, message):
              await message.edit(f"**Bot {g}  inline is disabled turn it on!**")
              return
            except BaseException as a:
-             await client.edit_message_text(
+
+            msg=await app.edit_message_text(
     chat_id=message.chat.id,
     message_id=message.message_id,
     text=f"**ERROR** - `{a}`\n\n**Occured while  opening help menu try doing** __{g} Help Menu__\n\n**if help still not appears contact support**",
-    reply_markup =InlineKeyboardMarkup([
+  )
+
+            try:
+             await bot.send_message(Variable.LOGS_CHAT_ID, "Contact Support Here if help crashed!",    reply_markup =InlineKeyboardMarkup([
                 [InlineKeyboardButton(text="Contact Support", url="https://t.me/lightning_support_group")],
+
             ]
-            )  )
+            ),
+
+            reply_to_message_id=msg.message_id
+            )
+            except BaseException:
+             pass
 
 @light.on(["details"])
 async def detail(client, message):

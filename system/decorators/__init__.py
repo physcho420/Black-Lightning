@@ -31,7 +31,7 @@ import system
 from pyrogram.handlers import MessageHandler
 
 import inspect
-from pyrogram import filters
+from pyrogram import filters, ContinuePropagation
 
 from system.Config import *
 from system.Config.errors import *
@@ -81,9 +81,12 @@ class light:
              logging.info(e)
             def handle(function):
 
-                   async def call(client, message): # off course basic help fron friday  for decorator.
-                       await function(client, message)
-                           
+                   async def call(client, message):
+                  # off course basic help fron friday  for decorator.
+                       try:
+                         await function(client, message)
+                       except ContinuePropagation:
+                         raise ContinuePropagation
                    system.app.add_handler(MessageHandler(call, filters=self.filter), group=self.grup) # sorry TwT
 
                    return call

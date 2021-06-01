@@ -1,24 +1,13 @@
-
-# I'm NUB XoX 
-# 
-# 
-# 
-# 
-# 
-# 
-# 
-# 
-# 
-# Learning is the key OWO
-
+# Thanks @dev for dis plug <3
 
 import logging
 from git import Repo
 import git
 import asyncio 
 import os
+import heroku3
 from system.Config import Variable
-from system.Config.utils import Client, language
+from system.Config.utils import language
 from system import (  app,
   g,
   bot,
@@ -101,8 +90,8 @@ async def updater(client, message):
     
        upstream.fetch('rebirth')
        repo.git.reset("--hard", "FETCH_HEAD")
-    hel = Client()
-    heroku_applications = hel.herokuclient
+    heroku = heroku3.from_key(Variable.HEROKU_API_KEY)
+    heroku_applications = heroku.apps()
     if len(heroku_applications) >= 1:
         if APP_NAME is not None & API_KEY is not None:
             heroku_app = None
@@ -145,5 +134,6 @@ async def strt(message, refspec, remote):
 
 COMMAND_HELP.update({
     f"git": f"`{HNDLR}update",
-    "git's help" : "**USE**: __{language('Updates userbot')}__"
+    "git's help" : "**USE**: __{language('Updates userbot')}__",
+    "git's type": "updater"
 })

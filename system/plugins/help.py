@@ -10,9 +10,7 @@
 # import sys
 # import os
 # from sys import path
-# dir_path = "/absolute/path/to/E:\on_cmd-UserBot"
-# sys.path.insert(0, dir_path)
-# sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
+
 from nltk.util import Index
 from pyrogram.methods import messages
 
@@ -22,6 +20,7 @@ from system.decorators import ERRORS_NAME
 from system.plugins import light
 from system import CMD_LIST, COMMAND_HELP, bot, app, SUDO_USER_NO_OF_TIME_USED
 from pyrogram.errors import BotInlineDisabled
+from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 import logging
 import pandas as pd
 
@@ -90,9 +89,14 @@ async def helper(client, message):
              await message.edit(f"**Bot {g}  inline is disabled turn it on!**")
              return
            except BaseException as a:
-             logging.error(a)
-             await  message.edit(f"**ERROR** - `{a}`\n\n**Occured while  opening help menu try doing** __{g} Help Menu__\n\n**if help not appears contact @lightning_support_grup**")
-    
+             await client.edit_message_text(
+    chat_id=message.chat.id,
+    message_id=message.message_id,
+    text=f"**ERROR** - `{a}`\n\n**Occured while  opening help menu try doing** __{g} Help Menu__\n\n**if help still not appears contact support**",
+    reply_markup =InlineKeyboardMarkup([
+                [InlineKeyboardButton(text="Contact Support", url="https://t.me/lightning_support_group")],
+            ]
+            )  )
 
 @light.on(["details"])
 async def detail(client, message):
@@ -101,10 +105,9 @@ async def detail(client, message):
     try:
 
      txt = message.text
-    except IndexError as e:
-      await message.edit(e)
-    if " " in  txt:
-      text = message.text.split()[1]
+     text = message.text.split()[1]
+    except IndexError:
+      await message.edit(f"**Can not Execute Command, the proper way is** : `{HNDLR}deatils ( plugin name )`")
     try:
          string = ""
          o = str(COMMAND_HELP[f"{text}s' help"])
@@ -117,5 +120,6 @@ COMMAND_HELP.update({
   "help": f"`{HNDLR}help (command) or {HNDLR}help`\
   \n{HNDLR}deatils ( plugin name )",
   "help's help": f"**USE**: __{HNDLR}help (command) gets the detailed help without triggering help menu and {HNDLR}help triggers help menu__\
-  \n\n`{HNDLR}details (plugin name)` __it will get details without triggering help menu__.**"
+  \n\n`{HNDLR}details (plugin name)` __it will get details without triggering help menu__.**",
+  "help's type": "helper"
 })

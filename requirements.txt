@@ -22,3 +22,4 @@ wkhtmltopdf
 imgkit
 psycopg2
 pyautogui
+googletrans

@@ -53,7 +53,9 @@ DEVS = "1311769691" # more to be added
 @light.on(["a","ap", "approve"])
 async def ap(client, message: Message):
        users=list(OrderedDict.fromkeys(all_user()))
-
+       if Variable.PROTECTION == "OFF":
+          logging.info("Execution Failed as Protection is off")
+          return   
        try:
 
         #   await message.edit(f"**{language('APPROVED! USER')} USER** - {id}")
@@ -87,6 +89,9 @@ async def ap(client, message: Message):
 
 @light.on(["da", "disap", "disapprove"])
 async def dis(client, message: Message):
+    if Variable.PROTECTION == "OFF":
+          logging.info("Execution Failed as Protection is off")
+          return   
     users=list(OrderedDict.fromkeys(all_user()))
 
     if " " not in message.text:

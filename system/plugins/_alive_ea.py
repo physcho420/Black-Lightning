@@ -17,8 +17,8 @@ if ALIVE_IMG is None:
 
 
 
-@light.on(["alive", "black", "alv", f"{OWNER}", "awake"], sudo_ids=Variable.SUDO_IDS, file = "_alive_ea")
-async def alive(client, m):
+@light.on(["alive"], -1)
+async def alivae(client, message):
     if ALIVE_MESSAGE is  None:
       text = f"""
 ʙʟᴀᴄᴋ ʟɪɢʜᴛɴɪɴɢ is ᴀᴡᴀᴋᴇɴᴇᴅ
@@ -32,11 +32,12 @@ async def alive(client, m):
       """
     else:
       text = ALIVE_MESSAGE
+    print("ALIVE")
     if ALIVE_IMG.endswith(".mp4"):
           
-        await app.send_video(m.chat.id, ALIVE_IMG, caption=text)
+        await app.send_video(message.chat.id, ALIVE_IMG, caption=text)
     elif ALIVE_IMG.endswith(".jpg") or ALIVE_IMG.endswith(".png"):
-        await app.send_photo(m.chat.id, ALIVE_IMG, caption=text)
+        await app.send_photo(message.chat.id, ALIVE_IMG, caption=text)
           
 
 

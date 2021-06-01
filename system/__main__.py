@@ -21,7 +21,6 @@ logging.basicConfig(level=logging.INFO)
 logging.basicConfig(level=logging.ERROR)
 
 
-logger.setLevel(logging.INFO)
 
 import holidays
 from datetime import date, datetime

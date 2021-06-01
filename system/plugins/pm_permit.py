@@ -117,7 +117,7 @@ async def dis(client, message: Message):
 
 
 @counter
-@app.on_message(filters.private & ~filters.edited & ~filters.me & ~filters.via_bot)
+@app.on_message(filters.private & ~filters.edited & ~filters.me & ~filters.bot)
 async def pm(client, message: Message):
     if Variable.PROTECTION == "OFF":
       return   
@@ -151,11 +151,9 @@ async def pm(client, message: Message):
 
 
         elif PM_PERMIT.endswith(".png") or PM_PERMIT.endswith(".jpg") and not str(message.chat.id) in pro:
-          await app.delete_messages(message.chat.id, message.message_id, revoke=True)
           update_turns(message.chat.id)
 
           await app.send_photo(message.chat.id, PM_PERMIT,)
-          await app.delete_messages(message.chat.id, message.message_id, revoke=True)
           bot_results=await app.get_inline_bot_results(g, "Pm Protect")
           await  app.send_inline_bot_result(
     message.chat.id,
@@ -236,5 +234,6 @@ COMMAND_HELP.update({
     \n\n`{HNDLR}da or dispprove\
     \n**USE**: __Disapproves user from your pm!__ `\
     \n\n{HNDLR}listapprovd\
-    \n**USE**: __approves user to your pm__"
+    \n**USE**: __approves user to your pm__",
+    "pm_permit's type": "Security"
 })

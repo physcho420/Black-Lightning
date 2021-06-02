@@ -13,7 +13,7 @@
 
 # async def face(client, message):
 #  if not message.media:
-#      await message.edit_message_text("**Are you sure this is image or video?**")
+#      await message.edit("**Are you sure this is image or video?**")
 #      return
 #  download=await message.download()
 #  img = cv2.cvtColor(download, cv2.COLOR_BGR2RGB)

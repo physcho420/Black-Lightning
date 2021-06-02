@@ -22,7 +22,7 @@ async def contact(client, message):
     message.delete()
     # if not no and name:
         # syntx=language("Syntax")
-        # await message.edit_message_text(f"{syntx}: {HNDLR}send contact (phone number) (name)")
+        # await message.edit(f"{syntx}: {HNDLR}send contact (phone number) (name)")
         # return
     await app.send_contact(message.chat.id, first_name =name, disable_notification=True)
 

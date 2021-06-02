@@ -119,19 +119,19 @@ class schedule(light):
      resume:bool = False):
          scheduler = AsyncIOScheduler()
          scheduler.pause()
-         await message.edit_message_text(f"**All! {language('scheduling task that are paused')}**.")
+         await message.edit(f"**All! {language('scheduling task that are paused')}**.")
          if shutdown is True:
           try:   
              scheduler.shutdown()
-             await message.edit_message_text(f"**{language('scheduler is shutdowned')}**")
+             await message.edit(f"**{language('scheduler is shutdowned')}**")
           except Exception as e:
-              await message.edit_message_text(e)
+              await message.edit(e)
          elif resume is True:
              try:
                  scheduler.resume()
-                 await  message.edit_message_text(f"**{language('All tasks are resumed')}**")
+                 await  message.edit(f"**{language('All tasks are resumed')}**")
              except Exception as e:
-                await message.edit_message_text(e)
+                await message.edit(e)
 
 
 

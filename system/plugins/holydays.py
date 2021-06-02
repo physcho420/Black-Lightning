@@ -46,6 +46,6 @@ async def _(client, message):
     for i in ttl:  
 
         await asyncio.sleep(anmation_interval)
-        await message.edit_message_text(
+        await message.edit(
             chars[i % 29], link_preview=True
         )  

@@ -90,7 +90,7 @@ async def helper(client, message):
              return
            except BaseException as a:
 
-            msg=await app.edit_message_text(
+            msg=await app.edit(
     chat.id=message.chat.id,
     message_id=message.message_id,
     text=f"**ERROR** - `{a}`\n\n**Occured while  opening help menu try doing** __{g} Help Menu__\n\n**if help still not appears contact support**",

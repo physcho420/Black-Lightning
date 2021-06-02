@@ -237,7 +237,7 @@ async def detailed(client, query: CallbackQuery):
                 )
             ],
         ]
-    await query.edit_message_text(f"Master Left Reason - {Variable.AFK_PM_MESSAGE}", reply_markup=m)
+    await query.edit(f"Master Left Reason - {Variable.AFK_PM_MESSAGE}", reply_markup=m)
 
 @bot.on_callback_query(filters.regex(pattern="menu"))
 
@@ -265,7 +265,7 @@ async def query_hndr(client, message):
         reply_markup = help_menu(
             client_page + 1, LIST, "help"  # pylint:disable=E0602
         )
-        await message.edit_message_text(reply_markup=InlineKeyboardMarkup(reply_markup))
+        await message.edit(reply_markup=InlineKeyboardMarkup(reply_markup))
     else:
       
         client_is_best = "Oh C'mon You Think You Can Touch This? ಠ╭╮ಠ!"
@@ -300,7 +300,7 @@ async def detailed(client, message):
                     )
                 ],
             ]
-                        await message.edit_message_text(
+                        await message.edit(
                         text=lightning_help_strin,
                         reply_markup=InlineKeyboardMarkup(o)
                     
@@ -351,7 +351,7 @@ async def query_hndr(client, message):
          
     
     
-           await message.edit_message_text(
+           await message.edit(
              hlp_str,
             reply_markup=InlineKeyboardMarkup(mkp)
            )
@@ -367,7 +367,7 @@ async def query_hndr(client, message: CallbackQuery):
         reply_markup = help_menu(
              lightning_page - 1, LIST, "help"  # pylint:disable=E0602
         )
-        await message.edit_message_text(text ="Type {}", reply_markup=InlineKeyboardMarkup(reply_markup))
+        await message.edit(text ="Type {}", reply_markup=InlineKeyboardMarkup(reply_markup))
 
 
 
@@ -392,7 +392,7 @@ async def chill(client, message):
     file=message.matches[0].group(1)
     pg_no=message.matches[0].group(1)
     a = 0
-    await message.edit_message_text(
+    await message.edit(
             f"`File and plugin Removed`",
             reply_markup=InlineKeyboardMarkup([
         
@@ -421,7 +421,7 @@ async def ho(client, message):
     await message.answer("Returned To Home", cache_time=0, show_alert=False)
     reply_markup = help_menu(o, sv, "help")
     ho = f"""**Black Lightning {language('help menu')}**: {language('Commands')}: {len(sv)}"""
-    await message.edit_message_text(ho, reply_markup=InlineKeyboardMarkup(reply_markup))
+    await message.edit(ho, reply_markup=InlineKeyboardMarkup(reply_markup))
 
 
 
@@ -494,7 +494,7 @@ async def command(client ,event):
     buttons = help_menu(0, ASSISTANT_HELP, 'help')
     if des in ASSISTANT_HELP:
 
-     await event.edit_message_text(reply_markup =buttons)
+     await event.edit(reply_markup =buttons)
 
 @bot.on_callback_query(filters.regex(pattern="_cmd_data_(.*)"))
 
@@ -510,7 +510,7 @@ async def lightning_pugins_query_hndlr(client ,event):
         
         assistant_buttons = assistant_help_strin 
         assistant_buttons += "\n\n**In Case Any Problem @lightning_support_grup**".format(cmd)
-        await event.edit_message_text(assistant_buttons)
+        await event.edit(assistant_buttons)
     
     except KeyError:
         await event.answer("The command isn't displayable", cache_time=0, alert=True)
@@ -527,7 +527,7 @@ async def lightning_pugins_query_hndlr(client, lightning):
             buttons = help_menu(
                 lightning_page - 1, ASSISTANT_HELP, "help"  # pylint:disable=E0602
             )
-            await lightning.edit_message_text(txt="**Commands Listed Choose which one to know**",reply_markup=buttons)
+            await lightning.edit(txt="**Commands Listed Choose which one to know**",reply_markup=buttons)
 
 import io
 # from system.sqls.bot_sql import *
@@ -549,7 +549,7 @@ async def ass_pugins_query_hndlr(client, lightning):
         buttons = help_menu(
             lightning_page + 1, ASSISTANT_HELP, "help"  # pylint:disable=E0602
         )
-        await lightning.edit_message_text("**Commands Listed Choose which one to know**", reply_markup=buttons)
+        await lightning.edit("**Commands Listed Choose which one to know**", reply_markup=buttons)
 
 
 
@@ -595,7 +595,7 @@ async def lightning_is_better(client, message):
     name = user.first_name
     bhat = user.last_online_date  
     text1 = "**Hello User `{}`,  master was last online on `{}`**\n**Kindly wait for him to be online :)** ".format(name, bhat)
-    await message.edit_message_text(text1)
+    await message.edit(text1)
     await app.send_message(
         Variable.LOGS_CHAT_ID,
         f"**Hello {USER}, [{name}]({user.id}) wants to dicuss something important!.**",
@@ -617,7 +617,7 @@ async def lightning_is_better(client, message):
 
     ))
     user_id = user.id
-    await message.edit_message_text(f"**Hello {user.first_name} if u are friend kindly contact him via {g}**\n\n__{USER}:- was last online on__ {owner.last_online_date}")
+    await message.edit(f"**Hello {user.first_name} if u are friend kindly contact him via {g}**\n\n__{USER}:- was last online on__ {owner.last_online_date}")
 
     
     
@@ -634,7 +634,7 @@ async def lightning_is_better(client, message: CallbackQuery):
     user =   await app.get_users(int(message.from_user.id))
     bot_id = await bot.get_me()
     bot_id = bot_id.id
-    await message.edit_message_text('Master is busy for some reason contact him via bot link given below',
+    await message.edit('Master is busy for some reason contact him via bot link given below',
     reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("Contact Him", url=f"t.me/{Variable.TG_BOT_USER_NAME}")]]))
 
     # await app.send_message(

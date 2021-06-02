@@ -28,7 +28,7 @@ HNDLR = str(Variable.HNDLR)
 
 g =  Variable.TG_BOT_USER_NAME
 # unofficial_or_no_help = 0
-@light.on(["help"], grup = 13)
+@light.on(["help"])
 async def helper(client, message):
         count = 0
         try:
@@ -108,7 +108,7 @@ async def helper(client, message):
             except BaseException:
              pass
 
-@light.on(["details"], grup = 12)
+@light.on(["details"])
 async def detail(client, message):
   
     count = 0

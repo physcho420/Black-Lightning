@@ -28,7 +28,7 @@ HNDLR = str(Variable.HNDLR)
 
 g =  Variable.TG_BOT_USER_NAME
 # unofficial_or_no_help = 0
-@light.on(["help"])
+@light.on(["help"], grup = 13)
 async def helper(client, message):
         count = 0
         try:
@@ -90,8 +90,8 @@ async def helper(client, message):
              return
            except BaseException as a:
 
-            msg=await app.edit(
-    chat.id=message.chat.id,
+            msg=await app.edit_message_text(
+    chat_id=message.chat.id,
     message_id=message.message_id,
     text=f"**ERROR** - `{a}`\n\n**Occured while  opening help menu try doing** __{g} Help Menu__\n\n**if help still not appears contact support**",
   )
@@ -108,7 +108,7 @@ async def helper(client, message):
             except BaseException:
              pass
 
-@light.on(["details"])
+@light.on(["details"], grup = 12)
 async def detail(client, message):
   
     count = 0
@@ -131,5 +131,5 @@ COMMAND_HELP.update({
   \n{HNDLR}deatils ( plugin name )",
   "help's help": f"**USE**: __{HNDLR}help (command) gets the detailed help without triggering help menu and {HNDLR}help triggers help menu__\
   \n\n`{HNDLR}details (plugin name)` __it will get details without triggering help menu__.**",
-  "help's type": "helper"
+  "help": "help"
 })

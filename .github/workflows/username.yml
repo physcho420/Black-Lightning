@@ -21,9 +21,9 @@ jobs:
 
         with:
 
-          find: "chat_id"
+          find: ", grup = -1"
 
-          replace: "chat.id"
+          replace: ""
 
       - name: Create Pull Request
 

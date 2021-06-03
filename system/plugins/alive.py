@@ -17,7 +17,7 @@ if ALIVE_IMG is None:
 
 
 
-@light.on(["alive"], -1)
+@light.on(["alive"])
 async def alivae(client, message):
     if ALIVE_MESSAGE is  None:
       text = f"""
@@ -32,7 +32,6 @@ async def alivae(client, message):
       """
     else:
       text = ALIVE_MESSAGE
-    print("ALIVE")
     if ALIVE_IMG.endswith(".mp4"):
           
         await app.send_video(message.chat.id, ALIVE_IMG, caption=text)

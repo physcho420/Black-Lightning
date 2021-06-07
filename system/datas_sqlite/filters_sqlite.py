@@ -1,3 +1,6 @@
+ # Copyright (C) 2021 KeinShin@Github. All rights reserved
+
+
 from sqlite3.dbapi2 import OperationalError
 from system.datas_sqlite import c, conn
 try:

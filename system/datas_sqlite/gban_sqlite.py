@@ -1,3 +1,5 @@
+ # Copyright (C) 2021 KeinShin@Github. All rights reserved
+
 from system.datas_sqlite import c, conn
 from collections import *
 from sqlite3 import OperationalError

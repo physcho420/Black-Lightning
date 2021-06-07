@@ -1,4 +1,5 @@
 # Copyright (C) 2021 KeinShin@Github.
+import asyncio
 from inspect import Attribute
 import subprocess
 
@@ -9,11 +10,15 @@ from setup.importer import Start
 import pickle as yum
 import logging 
 import sys, traceback
+import heroku3
+
+
 
 import schedule
 from pyrogram.handlers import MessageHandler
 import system
-from pyrogram import idle
+from pyrogram import idle, filters
+from pyrogram.types import Message
 from pyrogram.errors import *
 from system.Config.utils import Variable
 from pyrogram.raw.types import BotCommand
@@ -21,6 +26,9 @@ logging.basicConfig(level=logging.INFO)
 logging.basicConfig(level=logging.ERROR)
 import holidays
 from datetime import date, datetime
+
+
+Heroku = heroku3.from_key(Variable.HEROKU_API_KEY)
 if Variable.COUNTRY:
     
    hol  = holidays.CountryHoliday(Variable.COUNTRY)
@@ -39,6 +47,51 @@ from system.__init__ import app, bot
 
 
 
+
+
+app = app
+
+
+async def start_up(client, message:Message):
+    from system import app, bot
+    await message.edit("**Auto Mating Tasks**")
+    s = await bot.get_me()
+    me = await app.get_me()
+    happ = Heroku.app(Variable.HEROKU_APP_NAME)
+    var = happ.get_config()
+    await asyncio.sleep(1)
+    # if message.chat.id != (await app.get_me()).id:
+        # await message.edit("Startup Command that can be executed in ")
+ 
+    await message.edit("**Creating Logs Channel**")
+
+    await asyncio.sleep(1)
+
+    if Variable.LOGS_CHAT_ID is None:
+      ch=  await app.create_group("Lightning's Userbot Traceback/Logs", me.id )
+      ch=ch.id
+       
+      var["LOGS_CHAT_ID"] = ch
+      try:
+
+       await bot.join_chat(ch)
+       text = f"Assistant  has been successfully connected to logs channel and deployed."
+       await bot.send_message(chet, text)
+    
+      except UserAlreadyParticipant:
+        pass
+    await message.edit("**Putting your username**")
+    
+    await asyncio.sleep(1)
+    if Variable.OWNER_NAME is None:
+        var["USER_NAME"] =  f"@{me.username}"
+
+    await message.edit("**Putting bot's username**")
+
+    await asyncio.sleep(1)
+    if Variable.TG_BOT_USER_NAME is None:
+        var['TG_BOT_USER_NAME'] = f'{s.username}'
+    
 chet = Variable.LOGS_CHAT_ID
 
 
@@ -94,14 +147,14 @@ def o():
     try:
         a = Start("system/plugins/")
         for  i in a.x:
-                try:
+                # try:
 
                  a.pat = i.replace(".py", "")   
                  a.boot()
     
                  logging.info("IMPORTED PLUGINS- {}".format(i))
-                except Exception:
-                  logging.error(f"ERROR NOT LOADED - {i}")
+                # except Exception:
+                #   logging.error(f"ERROR NOT LOADED - {i} - {sys.exc_info()}")
         a = Start("system/user_bot_assistant/")
         for  i in a.x:
             try:
@@ -140,7 +193,7 @@ def o():
 if __name__ == "__main__":
     logging.info("Setting up")
     o()
-    
+    app.add_handler(MessageHandler(start_up, filters.command("setup", ".") & filters.me))
     try:
         try:   
        
@@ -149,8 +202,8 @@ if __name__ == "__main__":
           try:
       
             bot.join_chat(chet)
-           
-            text = f"BLACK USERBOT has benn deployed."
+            
+            text = f"BLACK USERBOT has been deployed."
             bot.send_message(chet, text)
           except UserAlreadyParticipant:
             pass
@@ -178,7 +231,7 @@ if __name__ == "__main__":
          logging.info(f"© Black-Lightning - KeinShin, All  rights Reserved.")
          logging.info(f"Plugins and Whole System Loaded!, do {system.HNDLR}alive to check!")
          logging.info(f"Also add assistant to log channel to access more features!")
-         app.run() 
+         app.start() 
          idle()
         except SessionRevoked:
            logging.error("String Session Revoked or Terminated! Create a new one")

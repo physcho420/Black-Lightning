@@ -1,3 +1,6 @@
+ # Copyright (C) 2021 KeinShin@Github. All rights reserved
+
+
 import logging
 from pyrogram.types.messages_and_media.message import Message
 from system.datas_sqlite.filters_sqlite import delete, insert, filters, chats, cmds

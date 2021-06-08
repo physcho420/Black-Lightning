@@ -21,11 +21,13 @@ def get_env(env):
       red = []
       results = [i for i in results]
       # results =  results[0]
-      for i in get_env(env):
+      for i in results:
           red.append(i[env])
       return list(OrderedDict.fromkeys(red))
     
-    except IndexError or KeyError:
+    except IndexError:
+        return None
+    except KeyError:
         return None
 
 
@@ -37,7 +39,3 @@ def del_env(env):
     results = results[env]
     env = {env: results}
     en.delete_one(env)
-
-# set_env("deaf", "no")
-for i in get_env('deaf'):
-    print(i['deaf'])

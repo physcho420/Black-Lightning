@@ -79,7 +79,7 @@ class env(object):
     ALIVE_ASCII =  os.environ.get("ALIVE_ASCII", None)
     if not ALIVE_ASCII is None:
         pass
-    DATABASE_URL = os.environ.get("DATABASE_URL", None)
+    MONGO_DB_URL = os.environ.get("MONGO_DB_URL", None)
     HNDLR = os.environ.get("HNDLR", ".")
     STRING_SESSION = os.environ.get("STRING_SESSION", None)
     NO_ROWS_HELP_MENU = os.environ.get("NO_ROWS_HELP_MENU", None)

@@ -15,7 +15,6 @@ import io
             # out_file.name = "cmd_list.text"
 import logging
 import os
-from system.data_mongo.Pyfilters import get_
 from system.data_mongo.env_db import get_env
 import system
 from system.Config import a
@@ -136,6 +135,8 @@ class var(object):
       TG_BOT_TOKEN = exconfig.TG_BOT_TOKEN
     except AttributeError:
         logging.info("The credentials given in exconfig is in correct, correct and try again")
+    except NameError:
+        pass
     AFK_PM_MESSAGE = get_env("afk_message")
     TG_BOT_USER_NAME = os.environ.get("TG_BOT_USER_NAME", "@Kakrotooobot")
     PROTECTION = get_env('protection')

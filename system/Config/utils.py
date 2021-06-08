@@ -2,6 +2,8 @@
 
 
 import os
+from pathlib import Path
+import platform
 import string
 
 
@@ -13,6 +15,8 @@ import io
             # out_file.name = "cmd_list.text"
 import logging
 import os
+from system.data_mongo.Pyfilters import get_
+from system.data_mongo.env_db import get_env
 import system
 from system.Config import a
 
@@ -54,12 +58,11 @@ async def bot_name():
 
 # from var import Var
 # herokuclient = heroku3.from_key(Var.HEROKU_API_KEY)
-if a:
-    from exconfig import variable as Variable
 
 
 
-class Variable(object):
+
+class env(object):
     TG_API_ID = os.environ.get("TG_APP_ID", None)
     TG_API_HASH = os.environ.get("TG_API_HASH", None)
     TG_BOT_TOKEN = os.environ.get("TG_BOT_TOKEN", None)
@@ -95,9 +98,7 @@ class Variable(object):
   
         OWNER_NAME = b
     PM_SECURITY_MSG = os.environ.get("PM_SECURITY_MSG", None)
-    SUDO_IDS = os.environ.get("SUDO_ID", None)
-    if SUDO_IDS is not None:
-        SUDO_IDS = SUDO_IDS.split()
+    SUDO_IDS = get_env('sudo')
     LOGS_CHAT_ID = os.environ.get("LOGS_CHAT_ID", None)
     COUNTRY = os.environ.get("COUNTRY", None)
     if COUNTRY is None:
@@ -120,11 +121,74 @@ class Variable(object):
         LANGUAGE = "english"
     
 
-Var = Variable
 
+
+class var(object):
+    try:
+
+     import exconfig
+    except ModuleNotFoundError:
+        pass
+    try:
+
+      TG_API_ID = exconfig.TG_API_ID
+      TG_API_HASH = exconfig.TG_API_HASH
+      TG_BOT_TOKEN = exconfig.TG_BOT_TOKEN
+    except AttributeError:
+        logging.info("The credentials given in exconfig is in correct, correct and try again")
+    AFK_PM_MESSAGE = get_env("afk_message")
+    TG_BOT_USER_NAME = os.environ.get("TG_BOT_USER_NAME", "@Kakrotooobot")
+    PROTECTION = get_env('protection')
+    APP_NAME = None
+    HEROKU_API_KEY = None
+    HEROKU_APP_NAME = None
+    MONGO_URL = get_env("mongo_db_url")
+    HNDLR = get_env('hndlr')
+    STRING_SESSION = get_env('string_session')
+    NO_ROWS_HELP_MENU = get_env("NO_ROWS_HELP_MENU".lower())
+    if NO_ROWS_HELP_MENU is None:
+        NO_ROWS_HELP_MENU = 3
+
+    # clien = Client()
+    NO_COLUMNS_HELP_MENU = get_env("NO_COLUMNS_HELP_MENU".lower())
+    if NO_COLUMNS_HELP_MENU is None:
+        NO_COLUMNS_HELP_MENU = 7
+  
+    USER_NAME = get_env("user_name")
+    OWNER_NAME = USER_NAME
+    if OWNER_NAME is None:
+  
+        OWNER_NAME = b
+    PM_SECURITY_MSG = get_env("PM_SECURITY_MSG")
+    SUDO_IDS = get_env('sudo'.lower())
+    LOGS_CHAT_ID = get_env("logs_chat_id")
+    COUNTRY = get_env("COUNTRY".lower())
+    if COUNTRY is None:
+        COUNTRY = "IN"
+    if PM_SECURITY_MSG is None:
+        PM_SECURITY_MSG = (
+        f"**Hello User..\n**"
+        f"**{str(OWNER_NAME)} is under  PM Security Your Message will be deleted until u're approved\nIf it is urgent contact him via {TG_BOT_USER_NAME}**"
+    )
+    else:
+        WARNING = PM_SECURITY_MSG
+    HELP_MENU_TXT = get_env("help_menu_txt")
+    if HELP_MENU_TXT is not None:
+        HELP_MENU_TXT.split()[0]
+    else:
+        a = "**Black Lightning Help Menu for User**"
+        a = HELP_MENU_TXT
+    LANGUAGE = os.environ.get("LANGUAGE", None)
+    if LANGUAGE is None:
+        LANGUAGE = "english"
 
 # Ported From https://github.com/jaskaranSM/HerokuManagerBot
 
+if Path('exconfig.py').is_file():
+    Variable = var
+
+else:
+    Variable = env
     
 class HerokuHelper:
     def __init__(self, appName, apiKey):
